@@ -76,13 +76,20 @@ export const lightTheme: IPartialTheme = {
 export const darkThemeInstance = createTheme(darkTheme);
 export const lightThemeInstance = createTheme(lightTheme);
 
+// Initialize theme state if it doesn't exist
+if (!window.__themeState__) {
+    window.__themeState__ = {
+        theme: 'light'
+    };
+}
+
 // Function to initialize theme
 export const initializeTheme = (isDark: boolean = true) => {
+    window.__themeState__.theme = isDark ? 'dark' : 'light';
     loadTheme(isDark ? darkThemeInstance : lightThemeInstance);
 };
 
 // Get current theme type
 export const getThemeType = (): 'dark' | 'light' => {
-    const currentTheme = window.__themeState__.theme;
-    return currentTheme.isInverted ? 'dark' : 'light';
+    return window.__themeState__.theme;
 };

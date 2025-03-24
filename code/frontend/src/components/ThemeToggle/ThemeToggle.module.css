@@ -1,7 +1,7 @@
 .container {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 16px;
 }
 
 .logoContainer {
@@ -18,28 +18,48 @@
     opacity: 0.9;
 }
 
+.toggleButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 50%;
+    background: transparent;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    color: var(--primary-text);
+}
+
+.toggleButton:hover {
+    background: var(--neutralLight);
+}
+
+.themeIcon {
+    width: 20px;
+    height: 20px;
+}
+
+/* Show/hide icons based on theme */
+[data-theme='light'] .themeIcon:last-child,
+[data-theme='dark'] .themeIcon:first-child {
+    display: none;
+}
+
 @media (max-width: 768px) {
     .logoContainer {
         max-width: 240px;
         height: 64px;
     }
-}
 
-.toggleButton {
-    color: var(--primary-text);
-    background: transparent;
-    border: none;
-    padding: 2px;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: background-color 0.2s ease;
-}
+    .toggleButton {
+        width: 28px;
+        height: 28px;
+    }
 
-.toggleButton:hover {
-    background-color: var(--neutralLight);
-}
-
-.toggleButton:focus {
-    outline: 2px solid var(--themePrimary);
-    outline-offset: 2px;
+    .themeIcon {
+        width: 16px;
+        height: 16px;
+    }
 }
