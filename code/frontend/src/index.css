@@ -1,24 +1,93 @@
+:root {
+    /* Base colors */
+    --primary-bg: #f8f9fa;
+    --header-bg: #000428;
+    --primary-text: #000428;
+    --secondary-text: #004e92;
+    --accent-color: #004e92;
+    --accent-light: #0066b3;
+
+    /* Glassmorphism */
+    --glass-bg: rgba(0, 4, 40, 0.1);
+    --glass-border: rgba(0, 78, 146, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 4, 40, 0.15);
+    --glass-blur: blur(8px);
+
+    /* Shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 4, 40, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 4, 40, 0.1);
+}
+
 * {
     box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 html,
 body {
     height: 100%;
-    margin: 0;
-    padding: 0;
 }
 
 html {
-    background: #f2f2f2;
-    font-family: "Segoe UI", "Segoe UI Web (West European)", "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+    background: var(--primary-bg);
+    background-image: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    color: var(--primary-text);
+    font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 #root {
     height: 100%;
 }
+
+/* Utility classes */
 .mt-8 {
     margin-top: 8px;
+}
+
+/* Accessibility improvements */
+:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Glass effect utility class */
+.glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--glass-shadow);
+}
+
+/* Fallback for browsers that don't support backdrop-filter */
+@supports not (backdrop-filter: blur(8px)) {
+    .glass-effect {
+        background: rgba(26, 26, 26, 0.95);
+    }
 }

@@ -613,7 +613,7 @@ const Chat = () => {
               />
               <QuestionInput
                 clearOnSend
-                placeholder="Type a new question..."
+                placeholder="What do you want to ask your data?"
                 disabled={isGenerating}
                 onSend={(question) => makeApiRequest(question)}
                 recognizedText={recognizedText}

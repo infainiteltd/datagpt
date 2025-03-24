@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import styles from "./Layout.module.css";
-import Azure from "../../assets/Azure.svg";
 import {
   CopyRegular,
   ShareRegular,
@@ -11,7 +10,7 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 import { HistoryButton } from "../../components/HistoryButton/HistoryButton";
 import { getUserInfo } from "../../api";
 import SpinnerComponent from '../../components/Spinner/Spinner';
-
+import { ThemeToggle } from "../../components/ThemeToggle/ThemeToggle";
 
 export type LayoutProps = {
   children: ReactNode;
@@ -26,6 +25,29 @@ const Layout = ({ children,toggleSpinner, ...props }: LayoutProps) => {
   const [isSharePanelOpen, setIsSharePanelOpen] = useState<boolean>(false);
   const [copyClicked, setCopyClicked] = useState<boolean>(false);
   const [copyText, setCopyText] = useState<string>("Copy URL");
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  useEffect(() => {
+    // Check for saved theme preference
+    const savedTheme = localStorage.getItem('theme') as 'light' | 'dark';
+    if (savedTheme) {
+      setTheme(savedTheme);
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    } else {
+      // Check system preference
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const initialTheme = prefersDark ? 'dark' : 'light';
+      setTheme(initialTheme);
+      document.documentElement.setAttribute('data-theme', initialTheme);
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
 
   const handleShareClick = () => {
     setIsSharePanelOpen(true);
@@ -77,15 +99,7 @@ const Layout = ({ children,toggleSpinner, ...props }: LayoutProps) => {
       <header className={styles.header} role={"banner"}>
         <div className={styles.headerContainer}>
           <Stack horizontal verticalAlign="center">
-            <img
-              src={Azure}
-              className={styles.headerIcon}
-              aria-hidden="true"
-              alt="Chat with your data"
-            />
-            <Link to="/" className={styles.headerTitleContainer}>
-              <h3 className={styles.headerTitle}>Chat with your data</h3>
-            </Link>
+            <ThemeToggle onToggleTheme={toggleTheme} />
             <Stack horizontal className={styles.layoutRightButtons}>
               {!showAuthMessage && showHistoryBtn && (
                 <HistoryButton

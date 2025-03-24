@@ -1,8 +1,31 @@
+:root {
+    --header-bg: #ffffff;
+    --body-bg: #ffffff;
+    --primary-text: #242424;
+    --secondary-text: #616161;
+    --neutralLight: #f3f2f1;
+    --themePrimary: #0078d4;
+    --accent-color: #0078d4;
+}
+
+[data-theme='dark'] {
+    --header-bg: #1f1f1f;
+    --body-bg: #1f1f1f;
+    --primary-text: #ffffff;
+    --secondary-text: #c8c8c8;
+    --neutralLight: #2d2d2d;
+    --themePrimary: #60cdff;
+    --accent-color: #60cdff;
+}
+
 body {
     font-size: 16px; /* Use relative units */
     line-height: 1.5;
     margin: 0;
     padding: 0;
+    background-color: var(--body-bg);
+    color: var(--primary-text);
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .header, .footer {
@@ -13,79 +36,122 @@ body {
 .layout {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    min-height: 100vh;
+    background-color: var(--body-bg);
 }
 
 .header {
-    background-color: #f2f2f2;
+    width: 100%;
+    background-color: var(--header-bg);
+    border-bottom: 1px solid var(--neutralLight);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    transition: background-color 0.3s ease;
 }
 
 .headerContainer {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
+}
+
+@media (max-width: 768px) {
+    .headerContainer {
+        padding: 0 12px;
+    }
 }
 
 .headerTitleContainer {
     display: flex;
-    align-items: center;
-    margin-left: 8px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 16px;
     text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+
+.headerTitleContainer:hover {
+    opacity: 0.9;
+}
+
+.headerTitleContainer:focus {
+    outline: 2px solid #4CAF50;
+    outline-offset: 2px;
+    border-radius: 4px;
 }
 
 .headerTitle {
-    font-family: "Segoe UI";
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
     font-style: normal;
     font-weight: 600;
-    font-size: 18px;
-    line-height: 28px;
-    display: flex;
-    align-items: flex-end;
-    color: #242424;
+    font-size: 20px;
+    line-height: 24px;
+    margin: 0;
+    color: var(--primary-text);
+    letter-spacing: -0.02em;
+}
+
+.headerSubtitle {
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;
+    color: var(--secondary-text);
+    margin-top: 1px;
+    letter-spacing: 0.01em;
 }
 
 .headerIcon {
     height: 24px;
     width: 24px;
-    margin-left: 36px;
+    margin-left: 0;
+    filter: brightness(0) invert(1);
+    transition: transform 0.2s ease;
+}
+
+.headerIcon:hover {
+    transform: scale(1.05);
 }
 
 .shareButtonContainer {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
     align-items: center;
-    padding: 5px 12px;
-    gap: 4px;
-    width: 86px;
+    justify-content: center;
+    width: 32px;
     height: 32px;
-    background: radial-gradient(109.81% 107.82% at 100.1% 90.19%, #0F6CBD 33.63%, #2D87C3 70.31%, #8DDDD8 100%) /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */;
-    border-radius: 4px;
-    flex: none;
-    order: 1;
-    flex-grow: 0;
+    background: transparent;
+    border: none;
+    border-radius: 50%;
     cursor: pointer;
+    transition: all 0.2s ease;
+    padding: 0;
+}
+
+.shareButtonContainer:hover {
+    background: rgba(0, 4, 40, 0.1);
+    transform: translateY(-1px);
+}
+
+.shareButton {
+    width: 20px;
+    height: 20px;
+    color: var(--accent-color);
+}
+
+.shareButtonText {
+    display: none;
 }
 
 .layoutRightButtons {
     position: absolute;
     right: 20px;
-    gap: 1rem;
-}
-
-.shareButton {
-    color: #FFFFFF;
-}
-
-.shareButtonText {
-    font-family: "Segoe UI";
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 20px;
-    display: flex;
-    align-items: center;
-    color: #FFFFFF;
+    gap: 0.75rem;
 }
 
 .urlTextBox {
