@@ -1,6 +1,6 @@
 import React from 'react';
 import InfinityLogo from './InfinityLogo';
-import DataGptText from './DataGptText';
+import DataGptText from './DataGptTextOLD';
 
 const LogoWithDataGptText: React.FC = () => {
   return (
@@ -15,4 +15,4 @@ const LogoWithDataGptText: React.FC = () => {
   );
 };
 
-export default LogoWithDataGptText; 
+export default LogoWithDataGptText;
