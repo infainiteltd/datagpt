@@ -55,7 +55,7 @@ describe('SpinnerComponent', () => {
         styles: expect.objectContaining({
           label: {
             fontSize: '20px',
-            color: 'rgb(91 184 255)',
+            color: '#0078d4', // Fluent UI's default themePrimary color
             fontWeight: 600,
           },
         }),
